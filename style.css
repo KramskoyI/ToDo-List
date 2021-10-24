@@ -16,7 +16,7 @@ h1{
     border: none;
     background-color: darkgray;
     margin: 0px 10px;
-    font-size: 30px;
+    font-size: 35px;
 }
 .block-add{
     width: 800px;
@@ -32,7 +32,7 @@ h1{
     background-color: rgb(0, 140, 255);
     font: normal normal 500 18px/41px Ubuntu;
     color: rgb(255, 254, 254);
-    height: 36px;
+    
 }
 .style-button{
     border: none;
