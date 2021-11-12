@@ -7,7 +7,7 @@ let li = document.getElementsByClassName('list-point');
 function createTodo() {
     let input = document.querySelector('input');
     let todo = {
-    task : input.value,
+    task: input.value,
     completed: false,
     id: Date.now(),
     };
@@ -31,14 +31,16 @@ document.addEventListener('change', function (event) {
     const span = event.target.nextElementSibling;
     
     todosList.find(function(todo){
-    if ( todo.task === span.textContent){
-        todo.completed = !todo.completed;
-    };
-    console.log(todo);
+        if ( todo.task === span.textContent){
+            todo.completed = !todo.completed;
+        };
     });
-    console.log(currentId, span.textContent);
    
 });
+// print todo
+document.addEventListener('dblclick', function(event){
+    
+})
 
     
 // paint todosList
