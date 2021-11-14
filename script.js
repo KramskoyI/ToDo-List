@@ -2,19 +2,21 @@ let todosList = [];
 let add = document.getElementById('add');
 let ul = document.getElementsByClassName('list');
 let li = document.getElementsByClassName('list-point');
+let div = document.getElementById('list');
 
 // add todo and push to []
 function createTodo() {
     let input = document.querySelector('input');
-    let todo = {
-    task: input.value,
-    completed: false,
-    id: Date.now(),
-    };
-    todosList.push(todo);
-    print();
+    if(input.value != ''){
+        let todo = {
+        task: input.value,
+        completed: false,
+        id: Date.now(),
+        };
+        todosList.push(todo);
+        print();
+    }
     input.value = '';
-    
 };
 add.addEventListener('click', createTodo);
 document.addEventListener('keydown',function(event){
@@ -22,48 +24,43 @@ document.addEventListener('keydown',function(event){
         createTodo();
     }
 });
+
 // Checked todo
-// document.addEventListener('change', function (event) {
-    //  = event.target.parentElement;
-    // let task =  event.target.parentElement;
-    // const currentId = task;
-    // const currentTask = todoList.find((task) => task.id === currentId);
-//     const span = event.target.nextElementSibling;
-    
-//     todosList.find(function(todo){
-//         if ( todo.task === span.textContent){
-//             todo.completed = !todo.completed;
-//         };
-//     });
-//    console.log(todosList)
-// });
-// input.addEventListener('change', toggleTask(todo.id));
-// function toggleTask(id){
-//     todosList.find(id);
-//     console.log(id)
-// }
-function findTodo(todo){
-    if(id === todo.id){
-        return todo;
-    }
+div.addEventListener('change', function (event) {
+    // const id = event.target.parentElement.getAttribute('id');
+    // todosList.find(function(todo){
+    //     if(id == todo.id){
+    //         todo.completed = !todo.completed;
+    //     }
+    // });
+  console.log(event);
+});
 
-};
-
-
-// print todo
+// right todo
 document.addEventListener('dblclick', function(event){
     const id = event.target.getAttribute('id');
-    const findT = todosList.find((todo) => todo.id === id);
-        
-    console.log('id html',id)
-    console.log('item',findT)
-    console.log('todosList',todosList)
-    
-})
+    const findT = todosList.find(function(todo){
+        if(id == todo.id){
+            return todo;
+        }
+    });
+});
+
+// delete todo
+document.addEventListener('click', function (event) {
+    // const id = event.target.parentElement.getAttribute('id');
+    // const index = todosList.findIndex(function(todo){
+    //     if(id == todo.id){
+    //         return todo;
+    //     }
+    // });
+    // todosList.splice(index, 1);
+    // print();
+    console.log(event);
+});
 
     
 // paint todosList
-
 function print(){
     let ul = document.querySelector("ul.list");
 
@@ -77,16 +74,18 @@ function print(){
         const input = document.createElement('input');
         input.type = 'checkbox';
         
-        // input.addEventListener('change', toggleTask(todo.id));
-        
-
         const span = document.createElement('span');
         span.insertAdjacentText('afterbegin', `${todo.task}`);
 
+        const button = document.createElement('button');
+        button.classList.add('style-button');
+        button.insertAdjacentText('afterbegin', 'Delete');
+
         li.appendChild(input);
         li.appendChild(span);
+        li.appendChild(button);
         
-        ul.appendChild(li)
+        ul.appendChild(li);
     });
 };
 
