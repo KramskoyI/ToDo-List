@@ -3,8 +3,6 @@ let add = document.getElementById('add');
 let div = document.getElementById('list');
 let filter = document.getElementById('filter');
 
-
-
 function tabStatus(status){
     let tabulatedArray = [];
     switch (status) {
