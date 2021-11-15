@@ -1,41 +1,17 @@
 let todosList = [];
-let add = document.getElementById('add');
-let div = document.getElementById('list');
-let filter = document.getElementById('filter');
+const add = document.getElementById('add');
+const div = document.getElementById('list');
+const filter = document.getElementById('filter');
+let tabulatedArray = [];
 
-function tabStatus(status){
-    let tabulatedArray = [];
-    switch (status) {
-      case ('all'):
-        tabulatedArray = todosList;
-        break;
 
-      case ('active'):
-        tabulatedArray = todosList.filter(function(todo){
-            if(todo.completed === false){
-                return todo;
-            }
-        });
-        break;
-
-      case ('checked'):
-        tabulatedArray = todosList.filter(function(todo){
-            if(todo.completed === true){
-                return todo;
-            }
-        });
-        break;
-    };
-    console.log(tabulatedArray)
-    return tabulatedArray;
-}
 // paint todosList
 function print(){
     let ul = document.querySelector("ul.list");
 
     ul.innerHTML = '';
 
-    todosList.forEach(function(todo){
+    tabulatedArray.forEach(function(todo){
         const li = document.createElement('li');
         li.classList.add('list-point');
         li.setAttribute('id', `${todo.id}`);
@@ -69,7 +45,7 @@ function print(){
 
 // add todo and push to []
 function createTodo() {
-    
+    let status = 'all';
     let input = document.querySelector('input');
     if(input.value != ''){
         let todo = {
@@ -78,11 +54,38 @@ function createTodo() {
         id: Date.now(),
         };
         todosList.push(todo);
-    }
+    };
+    tabStatus(status);
     print();
     input.value = '';
     
 };
+function tabStatus(status){
+    // let tabulatedArray = [];
+    switch (status) {
+      case ('all'):
+        tabulatedArray = todosList;
+        break;
+
+      case ('active'):
+        tabulatedArray = todosList.filter(function(todo){
+            if(todo.completed === false){
+                return todo;
+            }
+        });
+        break;
+
+      case ('checked'):
+        tabulatedArray = todosList.filter(function(todo){
+            if(todo.completed === true){
+                return todo;
+            }
+        });
+        break;
+    };
+    
+    return tabulatedArray;
+}
 add.addEventListener('click', createTodo());
 document.addEventListener('keydown',function(event){
     if (event.key === 'Enter') {
@@ -111,7 +114,7 @@ function checkTodo(element) {
         }});
     todoF.completed = !todoF.completed;
     print();
-    console.log(todosList);
+    
 };
 
 // delete todo
@@ -123,28 +126,28 @@ function deleteTodo(element) {
         }});
     todosList.splice(index, 1);
     print();
-    console.log(todosList);
+    
 };
 // right todo
-// document.addEventListener('dblclick', function(event){
-//     const span = event.target;
-    // const id = event.target.parentElement.getAttribute('id');
-    // const element = todosList.find(function(todo){
-    //     if(id == todo.id){
-    //         return todo;
-    //     }
-    // });
-    // const inputR = span.createElement('input');
-    // inputR.setAttribute('type', 'text');
+document.addEventListener('dblclick', function(event){
+    const span = event.target;
+    const id = event.target.parentElement.getAttribute('id');
+    const element = todosList.find(function(todo){
+        if(id == todo.id){
+            return todo;
+        }
+    });
+    const inputR = span.createElement('input');
+    inputR.setAttribute('type', 'text');
     
-//     console.log(span)
-// });
+    console.log(span)
+});
 
 //filter
 filter.addEventListener('click', function(event){
     let status = event.target.getAttribute('data');
     tabStatus(status);
-    
+    print();
 })
     
 
