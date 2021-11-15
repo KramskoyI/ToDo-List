@@ -91,3 +91,9 @@ li {
     text-decoration: line-through;
     color: rgb(68, 68, 68);
 }
+.inputPoint{
+    display: none;
+}
+.input-active{
+    display: block;
+}

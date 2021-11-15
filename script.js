@@ -23,6 +23,10 @@ function print(){
         const span = document.createElement('span');
         span.insertAdjacentText('afterbegin', `${todo.task}`);
 
+        const inputText = document.createElement('input');
+        inputText.type = 'text';
+        inputText.classList.add('inputPoint');
+
         if (todo.completed === false) {
             span.classList.remove('check');
         }
@@ -37,6 +41,7 @@ function print(){
 
         li.appendChild(input);
         li.appendChild(span);
+        li.appendChild(inputText);
         li.appendChild(button);
         
         ul.appendChild(li);
@@ -130,17 +135,26 @@ function deleteTodo(element) {
 };
 // right todo
 document.addEventListener('dblclick', function(event){
-    const span = event.target;
-    const id = event.target.parentElement.getAttribute('id');
+    const elementPage = event.target.parentElement;
+    const inputT = elementPage.querySelector('.inputPoint');
+    inputT.classList.add('input-active')
+    const text = '';
+    const id = elementPage.getAttribute('id');
     const element = todosList.find(function(todo){
         if(id == todo.id){
             return todo;
         }
     });
-    const inputR = span.createElement('input');
-    inputR.setAttribute('type', 'text');
+    // const inputR = span.createElement('input');
+    // inputR.setAttribute('type', 'text');
+    // получить значение инпут ** найти тудушку ** поменять значение
+    inputT.addEventListener('keydown',function(event){
+        if (event.key === 'Enter') {
+           element.task = inputT.value;
+        }
+        
+    });
     
-    console.log(span)
 });
 
 //filter
