@@ -87,3 +87,7 @@ li {
     margin: 10px auto;
     width: 600px;
 }
+.check{
+    text-decoration: line-through;
+    color: rgb(68, 68, 68);
+}
