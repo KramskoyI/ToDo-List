@@ -145,9 +145,6 @@ document.addEventListener('dblclick', function(event){
             return todo;
         }
     });
-    // const inputR = span.createElement('input');
-    // inputR.setAttribute('type', 'text');
-    // получить значение инпут ** найти тудушку ** поменять значение
     inputT.addEventListener('keydown',function(event){
         if (event.key === 'Enter') {
            element.task = inputT.value;
