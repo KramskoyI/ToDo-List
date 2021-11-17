@@ -1,12 +1,14 @@
-function View(rootElement){
-    this.root = rootElement;
+function View(){
+    // this.root = rootElement;
 };
 
-View.prototype.print = function (tabulatedArray = [1]) {
-    
-    ul.innerHTML = '';
+View.prototype.print = function (tabulatedArray = [3,1,1,1,]) {
 
-    const fragment = document.createDocumentFragment();
+    const ul = document.querySelector("ul.list");
+
+    ul.innerHTML = '';
+    
+    // const fragment = document.createDocumentFragment();
     
     tabulatedArray.forEach(function(todo){
 
@@ -42,10 +44,11 @@ View.prototype.print = function (tabulatedArray = [1]) {
         li.appendChild(inputText);
         li.appendChild(button);
             
-        fragment.appendChild(li);
+        // fragment.appendChild(li);
+        ul.appendChild(li);
     });
 
-    this.root.appendChild(fragment)
+    // this.root.appendChild(fragment)
 }
 
 export default View;

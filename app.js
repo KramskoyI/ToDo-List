@@ -1,14 +1,15 @@
 import View from './view.js'
+View.prototype.print()
 
-const ul = document.querySelector("ul.list");
+// const ul = document.querySelector("ul.list");
 
-function App() {
-    this.view = new View(ul);
-};
+// function App() {
+//     this.view = new View(ul);
+// };
 
-App.prototype.init() = function () {
-    this.view.print();
-};
+// // View.prototype.init() = function () {
+// //     this.view.print();
+// // };
+// App();
 
-
-export default App;
+// export default App;
