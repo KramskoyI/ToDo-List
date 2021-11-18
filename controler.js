@@ -20,20 +20,15 @@ Controler.prototype.addTodo = function () {
     this.todosList.push(todo);
     this.view.render(this.todosList);
     input.value = '';
-    console.log(this.todosList)
+    
 }
-// App.prototype.createTodo = function () {
-//     const counter = new Counter(Date.now());
-//     this.counterList.push(counter);
-  
-//     this.view.render(this.counterList);
-// }
+
 // document.addEventListener('keydown',function(event){
 //     if (event.key === 'Enter') {
 //         createTodo();
 //     }
 // });
-// // listener on todosList
+
 // div.addEventListener('click', function (event){
 //     let element = event.target;
 //     let data = element.getAttribute('data');;
@@ -46,7 +41,7 @@ Controler.prototype.addTodo = function () {
 //             break;
 //     };
 // });
-// // Checked todo
+
 // function checkTodo(element) {
 //     const id = element.parentElement.getAttribute('id');
 //     const todoF = todosList.find(function(todo){
@@ -58,7 +53,7 @@ Controler.prototype.addTodo = function () {
     
 // };
 
-// // delete todo
+
 // function deleteTodo(element) {
 //     const id = element.parentElement.getAttribute('id');
 //     const index = todosList.findIndex(function(todo){
@@ -69,7 +64,7 @@ Controler.prototype.addTodo = function () {
 //     print();
     
 // };
-// // right todo
+
 // document.addEventListener('dblclick', function(event){
 //     const elementPage = event.target.parentElement;
 //     const inputT = elementPage.querySelector('.inputPoint');
@@ -90,7 +85,7 @@ Controler.prototype.addTodo = function () {
     
 // });
 
-// //filter
+
 // filter.addEventListener('click', function(event){
 //     let status = event.target.getAttribute('data');
 //     tabStatus(status);

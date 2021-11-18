@@ -2,7 +2,8 @@
 function View(rootElement) {
     this.root = rootElement;
 }
-View.prototype.render = function (todos = []) {
+View.prototype.render = function (todos = [] ) {
+    
     this.clear();
 
     const fragment = document.createDocumentFragment();
@@ -42,6 +43,8 @@ View.prototype.render = function (todos = []) {
         
         fragment.appendChild(li);
     }.bind(this));
+    
+    this.root.appendChild(fragment);
 };
 
 View.prototype.clear = function () {
