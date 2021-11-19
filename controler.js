@@ -7,6 +7,10 @@ let ul = document.querySelector("ul.list");
 function Controler() {
     this.todosList = [];
     this.view = new View(ul);
+    // this.view = new View(listElement, {
+    //     onIncrease: (function (id) { this.increase(id); }).bind(this),
+    //     onDecrease: (function (id) { this.decrease(id); }).bind(this)
+    //   });
     
 }
 
@@ -20,15 +24,24 @@ Controler.prototype.addTodo = function () {
     this.todosList.push(todo);
     this.view.render(this.todosList);
     input.value = '';
-    
+
 }
-
-// document.addEventListener('keydown',function(event){
-//     if (event.key === 'Enter') {
-//         createTodo();
-//     }
-// });
-
+Controler.prototype.addTodoEnter = function (){
+    document.addEventListener('keydown',function(event){
+        if (event.key === 'Enter') {
+            this.addTodo.bind(this);
+        };
+    });
+}
+// App.prototype.increase = function (id) {
+//     const counter = this.counterList.find(function (counter) {
+//       return counter.id === id;
+//     });
+//     counter.increase();
+//     this.view.render(this.counterList);
+//     console.log(id)
+//   }
+  
 // div.addEventListener('click', function (event){
 //     let element = event.target;
 //     let data = element.getAttribute('data');;

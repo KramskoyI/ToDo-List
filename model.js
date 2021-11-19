@@ -4,6 +4,9 @@ function Model(task, id, completed) {
     this.completed = completed;
 }
 
+// Counter.prototype.increase = function () {
+//     this.value += this.step;
+// }
   
 export default Model;
   
