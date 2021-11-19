@@ -1,6 +1,9 @@
 // render todosList
-function View(rootElement) {
+function View(rootElement, listeners) {
     this.root = rootElement;
+    this.inputListener = listeners.onInput;
+    this.buttonListener = listeners.onButton;
+    this.spanListener = listeners.onSpan;
 }
 // function View(rootElement, listeners) {
 //     this.root = rootElement;
@@ -21,9 +24,20 @@ View.prototype.render = function (todos = [] ) {
         const input = document.createElement('input');
         input.type = 'checkbox';
         input.setAttribute('data', 'check');
+        input.setAttribute('checked', '');
+        if(todo.completed === true){
+            input.checked = 'checked';
+        } else{input.checked = '';}
+        input.addEventListener('click', function(){
+            this.inputListener(todo.id);
+        }.bind(this));
+        
 
         const span = document.createElement('span');
         span.insertAdjacentText('afterbegin', `${todo.task}`);
+        span.addEventListener('dblclick', function(){
+            this.spanListener(todo.id);
+        }.bind(this));
 
     //     const incButton = document.createElement('button');
     //     incButton.insertAdjacentText('afterbegin', '+');
@@ -46,6 +60,9 @@ View.prototype.render = function (todos = [] ) {
         button.classList.add('style-button');
         button.setAttribute('data', 'delete');
         button.insertAdjacentText('afterbegin', 'Delete');
+        button.addEventListener('click', function(){
+            this.buttonListener(todo.id);
+        }.bind(this));
 
         li.appendChild(input);
         li.appendChild(span);

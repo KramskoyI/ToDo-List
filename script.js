@@ -96,7 +96,7 @@ function tabStatus(status){
             }
         });
         break;
-    };пше
+    };
     
     return tabulatedArray;
 }
