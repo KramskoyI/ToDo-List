@@ -28,6 +28,7 @@ Controler.prototype.addTodo = function () {
     this.todosList.push(todo);
     this.view.render(this.todosList);
     input.value = '';
+    this.save();
 }
 Controler.prototype.addTodoEnter = function (){
     document.addEventListener('keydown',function(event){
@@ -42,7 +43,7 @@ Controler.prototype.input = function (id) {
     });
     todo.input();
     this.view.render(this.todosList);
-    console.log(this.todosList);
+    this.save();
 }
 
 Controler.prototype.button = function (id) {
@@ -51,6 +52,10 @@ Controler.prototype.button = function (id) {
     });
     this.todosList.splice(index, 1);
     this.view.render(this.todosList);
+    this.save();
+    // const dialog = document.getElementsByClassName("dialog");
+    // dialog.classList.add('show');
+    // console.log(dialog)
 }
 
 Controler.prototype.span = function (id) {
@@ -65,8 +70,8 @@ Controler.prototype.span = function (id) {
         if (event.key === 'Enter') {
             todo.task = inputT.value;
             context.view.render(context.todosList);
+            
         };
-        
     });
 }
 
@@ -80,7 +85,6 @@ Controler.prototype.filterChecked = function(){
         }
     });
     this.view.render(this.masCheck);
-    console.log(this.masCheck)
 }
 
 Controler.prototype.filterActive = function(){
@@ -101,5 +105,30 @@ Controler.prototype.filterAll = function(){
 Controler.prototype.showAll = function(){
     this.view.render(this.todosList);
 }
+
+Controler.prototype.save = function(){
+    localStorage.setItem('todos', JSON.stringify(this.todosList))
+}
+Controler.prototype.getSave = function(){
+    localStorage.getItem('todos', JSON.parse(this.todosList));
+}
+Controler.prototype.clearedSave = function(){
+    localStorage.clear();
+}
+Controler.prototype.onload = function(){
+   
+    window.onload = function(test2){
+        const test = localStorage.getItem('todos');
+        const test2 = JSON.parse(test);
+        return test2
+    };
+    console.log(this, test2)
+
+}
+// sessionStorage.setItem("is_reloaded");
+// if (sessionStorage.getItem("is_reloaded") === true) {
+// 	console.log("relowding")
+// } else {console.log("no relowding")}
+
 
 export default Controler;

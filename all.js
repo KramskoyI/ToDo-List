@@ -6,3 +6,4 @@ all.init();
 all.filterCheck();
 all.filterActive();
 all.filterAll();
+all.onload();

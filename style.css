@@ -98,3 +98,25 @@ li {
 .input-active{
     display: block;
 }
+.dialog{
+    width: 600px;
+    background-color: rgb(117, 116, 116);
+    text-align: center;
+    margin: auto;
+    display: none;
+}
+.dialog-delete{
+    color: rgb(241, 237, 237);
+    font-size: 50px;
+}
+.dialog-button{
+    border: none;
+    width: 80px;
+    background-color: rgb(0, 140, 255);
+    font: normal normal 500 18px/26px Ubuntu;
+    color: rgb(255, 254, 254);
+}
+
+.show{
+    display: block;
+}
