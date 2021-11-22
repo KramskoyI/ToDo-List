@@ -3,4 +3,6 @@ import Controler from './controler.js';
 const all = new Controler();
 
 all.init();
-all.filtered();
+all.filterCheck();
+all.filterActive();
+all.filterAll();

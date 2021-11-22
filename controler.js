@@ -3,9 +3,13 @@ import Model from './model.js';
 
 const butAdd = document.getElementById('add');
 let ul = document.querySelector("ul.list");
-const filter = document.getElementById('filter');
+const checked = document.getElementById('checked');
+const active = document.getElementById('active');
+const all = document.getElementById('all');
 
 function Controler() {
+    this.masCheck = [];
+    this.masActive = [];
     this.todosList = [];
     this.view = new View(ul, {
         onInput: (function (id) { this.input(id); }).bind(this),
@@ -66,41 +70,36 @@ Controler.prototype.span = function (id) {
     });
 }
 
-Controler.prototype.filtered = function() {
-    filter.addEventListener('click', function(event){
-        let status = event.target.getAttribute('data');
-        console.log(status)
+Controler.prototype.filterCheck = function(){
+    checked.addEventListener('click', this.filterChecked.bind(this));
+}
+Controler.prototype.filterChecked = function(){
+    this.masCheck = this.todosList.filter(function(todo){
+        if(todo.completed === true){
+            return todo
+        }
     });
+    this.view.render(this.masCheck);
+    console.log(this.masCheck)
 }
 
+Controler.prototype.filterActive = function(){
+    active.addEventListener('click', this.filterActived.bind(this));
+}
+Controler.prototype.filterActived = function(){
+    this.masActive = this.todosList.filter(function(todo){
+        if(todo.completed === false){
+            return todo
+        }
+    });
+    this.view.render(this.masActive);
+    console.log(this.masActive)
+}
+Controler.prototype.filterAll = function(){
+    all.addEventListener('click', this.showAll.bind(this));
+}
+Controler.prototype.showAll = function(){
+    this.view.render(this.todosList);
+}
 
-
-
-
-// document.addEventListener('dblclick', function(event){
-//     const elementPage = event.target.parentElement;
-//     const inputT = elementPage.querySelector('.inputPoint');
-//     inputT.classList.add('input-active')
-//     const text = '';
-//     const id = elementPage.getAttribute('id');
-//     const element = todosList.find(function(todo){
-//         if(id == todo.id){
-//             return todo;
-//         }
-//     });
-//     inputT.addEventListener('keydown',function(event){
-//         if (event.key === 'Enter') {
-//            element.task = inputT.value;
-//         }
-        
-//     });
-    
-// });
-
-
-// filter.addEventListener('click', function(event){
-//     let status = event.target.getAttribute('data');
-//     tabStatus(status);
-//     print();
-// })
 export default Controler;
