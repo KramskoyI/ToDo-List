@@ -54,11 +54,11 @@ Controler.prototype.button = function (id) {
     // this.todosList.splice(index, 1);
     // this.view.render(this.todosList);
     // this.save();
-    console.log(context.todosList );
-    const dialogPromis = new Promise (function(resolve, reject){
+    
+    const dialogPromis = new Promise (function(){
         const dialog = document.getElementById("dialog");
         dialog.classList.add("dialog");
-        resolve();
+        console.log(id)
     });
     dialogPromis
         .then(dialog.addEventListener('click',function(event){
@@ -72,7 +72,7 @@ Controler.prototype.button = function (id) {
             } else {dialog.classList.remove("dialog");}
         }));
 }
-
+// сделать резолф по окначии промиса удалить и закрыть модалку а режект только при закрытии модалки
 Controler.prototype.span = function (id) {
     const context = this;
     const todo = this.todosList.find(function (todo) {
