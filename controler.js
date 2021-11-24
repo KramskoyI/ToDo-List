@@ -30,13 +30,13 @@ Controler.prototype.addTodo = function () {
     input.value = '';
     this.save();
 }
-Controler.prototype.addTodoEnter = function (){
-    document.addEventListener('keydown',function(event){
-        if (event.key === 'Enter') {
-            this.addTodo.bind(this);
-        };
-    });
-}
+// Controler.prototype.addTodoEnter = function (){
+//     document.addEventListener('keydown',function(event){
+//         if (event.key === 'Enter') {
+//             this.addTodo;
+//         };
+//     });
+// }
 Controler.prototype.input = function (id) {
     const todo = this.todosList.find(function (todo) {
       return todo.id === id;
@@ -50,12 +50,28 @@ Controler.prototype.button = function (id) {
     const index = this.todosList.findIndex(function (todo) {
         return todo.id === id;
     });
-    this.todosList.splice(index, 1);
-    this.view.render(this.todosList);
-    this.save();
-    // const dialog = document.getElementsByClassName("dialog");
-    // dialog.classList.add('show');
-    // console.log(dialog)
+    const context = this;
+    // this.todosList.splice(index, 1);
+    // this.view.render(this.todosList);
+    // this.save();
+    console.log(context.todosList );
+    const dialogPromis = new Promise (function(resolve, reject){
+        const dialog = document.getElementById("dialog");
+        dialog.classList.add("dialog");
+        resolve();
+    });
+    dialogPromis
+        .then(dialog.addEventListener('click',function(event){
+            const button = event.target.getAttribute('id');
+           
+            if(button == 'yes'){
+                context.todosList.splice(index, 1);
+                context.view.render(context.todosList);
+                context.save();
+                console.log(context.todosList)
+                dialog.classList.remove("dialog");
+            } else {dialog.classList.remove("dialog");}
+        }));
 }
 
 Controler.prototype.span = function (id) {
@@ -115,16 +131,16 @@ Controler.prototype.getSave = function(){
 Controler.prototype.clearedSave = function(){
     localStorage.clear();
 }
-Controler.prototype.onload = function(){
+// Controler.prototype.onload = function(){
    
-    window.onload = function(test2){
-        const test = localStorage.getItem('todos');
-        const test2 = JSON.parse(test);
-        return test2
-    };
-    console.log(this, test2)
+//     window.onload = function(test2){
+//         const test = localStorage.getItem('todos');
+//         const test2 = JSON.parse(test);
+//         return test2
+//     };
+//     console.log(this)
 
-}
+// }
 // sessionStorage.setItem("is_reloaded");
 // if (sessionStorage.getItem("is_reloaded") === true) {
 // 	console.log("relowding")
