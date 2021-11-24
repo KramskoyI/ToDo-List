@@ -63,7 +63,6 @@ Controler.prototype.button = function (id) {
     dialogPromis
         .then(dialog.addEventListener('click',function(event){
             const button = event.target.getAttribute('id');
-           
             if(button == 'yes'){
                 context.todosList.splice(index, 1);
                 context.view.render(context.todosList);
@@ -86,7 +85,6 @@ Controler.prototype.span = function (id) {
         if (event.key === 'Enter') {
             todo.task = inputT.value;
             context.view.render(context.todosList);
-            
         };
     });
 }
