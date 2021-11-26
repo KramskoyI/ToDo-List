@@ -147,28 +147,6 @@ Controler.prototype.clearedSave = function(){
 // if (sessionStorage.getItem("is_reloaded") === true) {
 // 	console.log("relowding")
 // } else {console.log("no relowding")}
-Controler.prototype.dragDrop = function() {
-    
-    const allPositions = ul.querySelectorAll('.listCaption');
 
-    // const dragStart = function () {
-    //     const li = document.querySelector('.list-point');
-    //     setTimeout(function(){li.classList.add('hide'), 0});
-    //     console.log('dragstart');
-        
-    // };
-    // const dragEnd = function () {
-    //     const li = document.querySelector('.list-point');
-    //     li.classList.remove('hide');
-    //     console.log('dragsend')
-    // };
-    
-    // ul.addEventListener('dragstart', dragStart);
-    // ul.addEventListener('dragend', dragEnd);
-
-    
-    // console.log(allPositions)
-     
-}
 
 export default Controler;

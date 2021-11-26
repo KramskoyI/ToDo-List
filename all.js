@@ -8,4 +8,3 @@ all.filterCheck();
 all.filterActive();
 all.filterAll();
 // all.onload();
-all.dragDrop();
