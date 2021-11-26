@@ -76,7 +76,7 @@ Controler.prototype.button = function (id) {
             } else {dialog.classList.remove("dialog");}
         }));
 }
-// сделать резолф по окначии промиса удалить и закрыть модалку а режект только при закрытии модалки
+// сделать резолф по окначии промиса удалить и закрыть модалку а режект только при закрытии модалки heththttjyrjryu
 Controler.prototype.span = function (id) {
     // const context = this;
     const todo = this.todosList.find(function (todo) {
