@@ -6,6 +6,7 @@ let ul = document.querySelector("ul.list");
 const checked = document.getElementById('checked');
 const active = document.getElementById('active');
 const all = document.getElementById('all');
+const li = document.querySelector('.list-point');
 
 function Controler() {
     this.masCheck = [];
@@ -24,19 +25,22 @@ Controler.prototype.init = function() {
 
 Controler.prototype.addTodo = function () {
     let input = document.querySelector('input');
-    const todo = new Model(input.value, Date.now(), false);
-    this.todosList.push(todo);
+    if(input.value != ''){
+        const todo = new Model(input.value, Date.now(), false);
+        this.todosList.push(todo);
+    }
     this.view.render(this.todosList);
     input.value = '';
     this.save();
 }
-// Controler.prototype.addTodoEnter = function (){
-//     document.addEventListener('keydown',function(event){
-//         if (event.key === 'Enter') {
-//             this.addTodo;
-//         };
-//     });
-// }
+Controler.prototype.addTodoEnter = function (){
+   
+    document.addEventListener('keydown',function(event){
+        if (event.key === 'Enter') {
+            this.addTodo();
+        };
+    }.bind(this));
+}
 Controler.prototype.input = function (id) {
     const todo = this.todosList.find(function (todo) {
       return todo.id === id;
@@ -74,7 +78,7 @@ Controler.prototype.button = function (id) {
 }
 // сделать резолф по окначии промиса удалить и закрыть модалку а режект только при закрытии модалки
 Controler.prototype.span = function (id) {
-    const context = this;
+    // const context = this;
     const todo = this.todosList.find(function (todo) {
         return todo.id === id;
     });
@@ -84,9 +88,9 @@ Controler.prototype.span = function (id) {
     inputT.addEventListener('keydown',function(event){
         if (event.key === 'Enter') {
             todo.task = inputT.value;
-            context.view.render(context.todosList);
+            this.view.render(this.todosList);
         };
-    });
+    }.bind(this));
 }
 
 Controler.prototype.filterCheck = function(){
@@ -143,6 +147,28 @@ Controler.prototype.clearedSave = function(){
 // if (sessionStorage.getItem("is_reloaded") === true) {
 // 	console.log("relowding")
 // } else {console.log("no relowding")}
+Controler.prototype.dragDrop = function() {
+    
+    const allPositions = ul.querySelectorAll('.listCaption');
 
+    // const dragStart = function () {
+    //     const li = document.querySelector('.list-point');
+    //     setTimeout(function(){li.classList.add('hide'), 0});
+    //     console.log('dragstart');
+        
+    // };
+    // const dragEnd = function () {
+    //     const li = document.querySelector('.list-point');
+    //     li.classList.remove('hide');
+    //     console.log('dragsend')
+    // };
+    
+    // ul.addEventListener('dragstart', dragStart);
+    // ul.addEventListener('dragend', dragEnd);
+
+    
+    // console.log(allPositions)
+     
+}
 
 export default Controler;
