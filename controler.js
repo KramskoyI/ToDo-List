@@ -6,7 +6,7 @@ let ul = document.querySelector("ul.list");
 const checked = document.getElementById('checked');
 const active = document.getElementById('active');
 const all = document.getElementById('all');
-const li = document.querySelector('.list-point');
+
 
 function Controler() {
     this.masCheck = [];
@@ -54,31 +54,36 @@ Controler.prototype.button = function (id) {
     const index = this.todosList.findIndex(function (todo) {
         return todo.id === id;
     });
-    const context = this;
-    // this.todosList.splice(index, 1);
-    // this.view.render(this.todosList);
-    // this.save();
-    
-    const dialogPromis = new Promise (function(){
+
+    const onFulfilled = function (){
+        this.todosList.splice(index, 1);
+        this.view.render(this.todosList);
+        this.save();
+        dialog.classList.remove("dialog");
+    }.bind(this);
+
+    const onRejected = function(){
+        dialog.classList.remove("dialog");
+    };
+
+    const dialogPromis = new Promise (function(resolve, reject){
         const dialog = document.getElementById("dialog");
         dialog.classList.add("dialog");
-        console.log(id)
-    });
-    dialogPromis
-        .then(dialog.addEventListener('click',function(event){
+        dialog.addEventListener('click',function(event){
             const button = event.target.getAttribute('id');
             if(button == 'yes'){
-                context.todosList.splice(index, 1);
-                context.view.render(context.todosList);
-                context.save();
-                console.log(context.todosList)
-                dialog.classList.remove("dialog");
-            } else {dialog.classList.remove("dialog");}
-        }));
+                resolve();
+            } else {
+                reject();
+            };
+        }.bind(this));
+    }.bind(this));
+
+    dialogPromis.then(onFulfilled, onRejected);
 }
-// сделать резолф по окначии промиса удалить и закрыть модалку а режект только при закрытии модалки heththttjyrjryu
+
 Controler.prototype.span = function (id) {
-    // const context = this;
+    
     const todo = this.todosList.find(function (todo) {
         return todo.id === id;
     });
@@ -133,20 +138,7 @@ Controler.prototype.getSave = function(){
 Controler.prototype.clearedSave = function(){
     localStorage.clear();
 }
-// Controler.prototype.onload = function(){
-   
-//     window.onload = function(test2){
-//         const test = localStorage.getItem('todos');
-//         const test2 = JSON.parse(test);
-//         return test2
-//     };
-//     console.log(this)
 
-// }
-// sessionStorage.setItem("is_reloaded");
-// if (sessionStorage.getItem("is_reloaded") === true) {
-// 	console.log("relowding")
-// } else {console.log("no relowding")}
 
 
 export default Controler;
