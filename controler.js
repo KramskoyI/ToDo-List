@@ -44,16 +44,25 @@ Controler.prototype.addTodo = function () {
     if(input.value != ''){
         const todo = new Model(input.value, Date.now(), false, pos);
         this.todosList.push(todo);
-    }
-    if (statusFilter === 'all'){
-        this.view.render(this.todosList);
-    }
+    };
+    switch(statusFilter){
+        case 'active': 
+            this.masActive = this.todosList.filter(function(todo){
+                if(todo.completed === false){
+                    return todo
+                }
+            }); 
+            this.view.render(this.masActive);
+            break;
+        case 'all': 
+            this.view.render(this.todosList);
+            console.log(statusFilter, '2')
+            break;
+    };
+    console.log(statusFilter,'3')
     input.value = '';
     pos +=1;
     this.save();  
-    
-    
-    
 }
 Controler.prototype.addTodoEnter = function (){
     
@@ -131,7 +140,6 @@ Controler.prototype.filterChecked = function(){
     });
     this.view.render(this.masCheck);
     statusFilter = 'checked';
-
 }
 
 Controler.prototype.filterActive = function(){
