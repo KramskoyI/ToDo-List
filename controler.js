@@ -6,6 +6,8 @@ let ul = document.querySelector("ul.list");
 const checked = document.getElementById('checked');
 const active = document.getElementById('active');
 const all = document.getElementById('all');
+const allChecked = document.getElementById('All');
+const deleteAllCheced = document.getElementById('AllChecked');
 let statusFilter = 'all';
 
 function Controler() {
@@ -20,7 +22,14 @@ function Controler() {
 }
 
 Controler.prototype.init = function() {
-    this.getSave();
+    const getList = localStorage.getItem('todos', JSON.stringify(this.todosList));
+    const readList = JSON.parse(getList);
+    this.todosList = readList;
+    if(this.todosList.length != 0){
+        this.view.render(this.todosList);
+    };
+    // this.getSave();
+    // this.clearedSave()
     butAdd.addEventListener('click', this.addTodo.bind(this));
 }
 
@@ -138,19 +147,24 @@ Controler.prototype.showAll = function(){
 Controler.prototype.save = function(){
     localStorage.setItem('todos', JSON.stringify(this.todosList))
 }
-Controler.prototype.getSave = function(){
-    const getList = localStorage.getItem('todos', JSON.stringify(this.todosList));
-    const readList = JSON.parse(getList);
-    this.todosList = readList;
-    if(this.todosList.length != 0){
-        this.view.render(this.todosList);
-    }
-    
-    
-}
+
 Controler.prototype.clearedSave = function(){
     localStorage.clear();
 }
+
+Controler.prototype.checkedAll = function(){
+    allChecked.addEventListener( 'click', function(event){
+        const button = event.target;
+        if( button == allChecked){
+            this.todosList.forEach( function (todo) {
+                todo.completed = true;
+                this.save();
+                this.view.render(this.todosList)
+            }.bind(this))
+        };
+    }.bind(this))
+}
+
 
 
 
