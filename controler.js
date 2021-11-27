@@ -164,6 +164,17 @@ Controler.prototype.checkedAll = function(){
         };
     }.bind(this))
 }
+Controler.prototype.deleteCheckedAll = function(){
+    deleteAllCheced.addEventListener('click', function(){
+        this.todosList = this.todosList.filter(function(todo){
+            if(todo.completed === false){
+                return todo}
+        });
+        this.save();
+        this.view.render(this.todosList);
+    }.bind(this))
+    
+}
 
 
 
