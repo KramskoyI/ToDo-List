@@ -21,21 +21,22 @@ View.prototype.render = function (todos = [] ) {
         box.classList.add('listCaption');
         box.addEventListener('dragover', function(event){ 
             event.preventDefault();
-            console.log('over')
+            console.log('over>>>',todo.pos);
+            
         });
         box.addEventListener('dragenter', function(event){
             event.preventDefault();
             this.classList.add('hovered');
-            console.log('enter')
+            console.log('enter>>>',todo.pos)
         });
         box.addEventListener('dragleave', function(){
             this.classList.remove('hovered');
-            console.log('leave')
+            console.log('leave>>>',todo.pos)
         });
         box.addEventListener('drop', function(){
             this.classList.remove('hovered');
-            console.log(this, 'drop');
-            this.append(li)
+            console.log(this, 'drop>>>',todo.pos);
+            this.append(li);
         });
 
         const li = document.createElement('li');
@@ -44,7 +45,7 @@ View.prototype.render = function (todos = [] ) {
         li.setAttribute('draggable', 'true')
         li.addEventListener('dragstart', function () {
             const li = document.querySelector('.list-point');
-            setTimeout(function(){li.classList.add('hide'), 0});
+            setTimeout(function(){li.classList.add('hide')}, 0);
             console.log('dragstart');
             
         });

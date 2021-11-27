@@ -7,6 +7,5 @@ all.addTodoEnter();
 all.filterCheck();
 all.filterActive();
 all.filterAll();
-
 all.checkedAll();
 all.deleteCheckedAll();

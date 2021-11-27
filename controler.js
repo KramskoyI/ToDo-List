@@ -9,6 +9,7 @@ const all = document.getElementById('all');
 const allChecked = document.getElementById('All');
 const deleteAllCheced = document.getElementById('AllChecked');
 let statusFilter = 'all';
+let pos = 1;
 
 function Controler() {
     this.masCheck = [];
@@ -35,23 +36,24 @@ Controler.prototype.init = function() {
         butAdd.addEventListener('click', this.addTodo.bind(this));
         this.addTodoEnter.bind(this);
     };
-    // else{ butAdd.addEventListener('click', this.addTodo.bind(this)); } ;
-    // this.getSave();
-    // this.clearedSave()
-    // butAdd.addEventListener('click', this.addTodo.bind(this));
 }
+
 
 Controler.prototype.addTodo = function () {
     let input = document.querySelector('input');
     if(input.value != ''){
-        const todo = new Model(input.value, Date.now(), false);
+        const todo = new Model(input.value, Date.now(), false, pos);
         this.todosList.push(todo);
     }
     if (statusFilter === 'all'){
         this.view.render(this.todosList);
     }
     input.value = '';
-    this.save();
+    pos +=1;
+    this.save();  
+    
+    
+    
 }
 Controler.prototype.addTodoEnter = function (){
     
