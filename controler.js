@@ -6,7 +6,7 @@ let ul = document.querySelector("ul.list");
 const checked = document.getElementById('checked');
 const active = document.getElementById('active');
 const all = document.getElementById('all');
-
+let statusFilter = 'all';
 
 function Controler() {
     this.masCheck = [];
@@ -29,7 +29,9 @@ Controler.prototype.addTodo = function () {
         const todo = new Model(input.value, Date.now(), false);
         this.todosList.push(todo);
     }
-    this.view.render(this.todosList);
+    if (statusFilter === 'all'){
+        this.view.render(this.todosList);
+    }
     input.value = '';
     this.save();
 }
@@ -108,6 +110,8 @@ Controler.prototype.filterChecked = function(){
         }
     });
     this.view.render(this.masCheck);
+    statusFilter = 'checked';
+
 }
 
 Controler.prototype.filterActive = function(){
@@ -120,13 +124,14 @@ Controler.prototype.filterActived = function(){
         }
     });
     this.view.render(this.masActive);
-    console.log(this.masActive)
+    statusFilter = 'active';
 }
 Controler.prototype.filterAll = function(){
     all.addEventListener('click', this.showAll.bind(this));
 }
 Controler.prototype.showAll = function(){
     this.view.render(this.todosList);
+    statusFilter = 'all';
 }
 
 Controler.prototype.save = function(){
