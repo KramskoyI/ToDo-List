@@ -72,12 +72,6 @@ View.prototype.render = function (todos = [] ) {
             this.spanListener(todo.id);
         }.bind(this));
 
-    //     const incButton = document.createElement('button');
-    //     incButton.insertAdjacentText('afterbegin', '+');
-    //     incButton.addEventListener('click', function () {
-    //     this.increaseListener(counter.id);
-    //     }.bind(this));
-
         const inputText = document.createElement('input');
         inputText.type = 'text';
         inputText.classList.add('inputPoint');

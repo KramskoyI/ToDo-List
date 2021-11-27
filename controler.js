@@ -20,6 +20,7 @@ function Controler() {
 }
 
 Controler.prototype.init = function() {
+    this.getSave();
     butAdd.addEventListener('click', this.addTodo.bind(this));
 }
 
@@ -36,7 +37,7 @@ Controler.prototype.addTodo = function () {
     this.save();
 }
 Controler.prototype.addTodoEnter = function (){
-   
+    
     document.addEventListener('keydown',function(event){
         if (event.key === 'Enter') {
             this.addTodo();
@@ -47,7 +48,7 @@ Controler.prototype.input = function (id) {
     const todo = this.todosList.find(function (todo) {
       return todo.id === id;
     });
-    todo.input();
+    todo.completed = !todo.completed;
     this.view.render(this.todosList);
     this.save();
 }
@@ -138,7 +139,14 @@ Controler.prototype.save = function(){
     localStorage.setItem('todos', JSON.stringify(this.todosList))
 }
 Controler.prototype.getSave = function(){
-    localStorage.getItem('todos', JSON.parse(this.todosList));
+    const getList = localStorage.getItem('todos', JSON.stringify(this.todosList));
+    const readList = JSON.parse(getList);
+    this.todosList = readList;
+    if(this.todosList.length != 0){
+        this.view.render(this.todosList);
+    }
+    
+    
 }
 Controler.prototype.clearedSave = function(){
     localStorage.clear();
