@@ -22,15 +22,23 @@ function Controler() {
 }
 
 Controler.prototype.init = function() {
+    
     const getList = localStorage.getItem('todos', JSON.stringify(this.todosList));
     const readList = JSON.parse(getList);
     this.todosList = readList;
-    if(this.todosList.length != 0){
-        this.view.render(this.todosList);
+
+    if (this.todosList.length === 0) {
+        butAdd.addEventListener('click', this.addTodo.bind(this));
+        this.addTodoEnter.bind(this);
+    } else { 
+        this.view.render(this.todosList)
+        butAdd.addEventListener('click', this.addTodo.bind(this));
+        this.addTodoEnter.bind(this);
     };
+    // else{ butAdd.addEventListener('click', this.addTodo.bind(this)); } ;
     // this.getSave();
     // this.clearedSave()
-    butAdd.addEventListener('click', this.addTodo.bind(this));
+    // butAdd.addEventListener('click', this.addTodo.bind(this));
 }
 
 Controler.prototype.addTodo = function () {
