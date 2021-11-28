@@ -11,6 +11,7 @@ const deleteAllCheced = document.getElementById('AllChecked');
 let statusFilter = 'all';
 let pos = 1;
 
+
 function Controler() {
     this.masCheck = [];
     this.masActive = [];
