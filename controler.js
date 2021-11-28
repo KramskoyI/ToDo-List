@@ -63,6 +63,7 @@ Controler.prototype.addTodo = function () {
     input.value = '';
     pos +=1;
     this.save();  
+    console.log(this.todosList)
 }
 Controler.prototype.addTodoEnter = function (){
     
@@ -163,7 +164,7 @@ Controler.prototype.showAll = function(){
 }
 
 Controler.prototype.save = function(){
-    localStorage.setItem('todos', JSON.stringify(this.todosList))
+    localStorage.setItem('todos', JSON.stringify(this.todosList));
 }
 
 Controler.prototype.clearedSave = function(){

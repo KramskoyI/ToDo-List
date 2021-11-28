@@ -16,6 +16,14 @@ View.prototype.render = function (todos = [] ) {
 
     const fragment = document.createDocumentFragment();
 
+    let dragStartPosition = 0;
+    let dragEndPosition = 0;
+    let dragStartItem = {};
+    let dragEndItem = {};
+    todos = todos.sort(function(a, b) {
+            return a.pos - b.pos;
+        }
+    );
     todos.forEach(function(todo){
         const box = document.createElement('li');
         box.classList.add('listCaption');
@@ -33,11 +41,14 @@ View.prototype.render = function (todos = [] ) {
             this.classList.remove('hovered');
             console.log('leave>>>',todo.pos)
         });
-        box.addEventListener('drop', function(){
+        
+        function drop(){
             this.classList.remove('hovered');
-            console.log(this, 'drop>>>',todo.pos);
-            this.append(li);
-        });
+            dragEndPosition = todo.pos;
+            dragEndItem = todo;
+            console.log('drop>>>',todo);
+        };
+        box.addEventListener('drop', drop);
 
         const li = document.createElement('li');
         li.classList.add('list-point');
@@ -46,14 +57,18 @@ View.prototype.render = function (todos = [] ) {
         li.addEventListener('dragstart', function () {
             const li = document.querySelector('.list-point');
             setTimeout(function(){li.classList.add('hide')}, 0);
-            console.log('dragstart');
+            dragStartPosition = todo.pos;
+            dragStartItem = todo;
+            console.log('dragstart', todo );
             
         });
         li.addEventListener('dragend', function () {
             const li = document.querySelector('.list-point');
             li.classList.remove('hide');
-            console.log('dragend')
-        });
+            dragEndItem.pos = dragStartPosition;
+            dragStartItem.pos = dragEndPosition;
+            this.render(todos);
+        }.bind(this));
         
         const input = document.createElement('input');
         input.type = 'checkbox';
@@ -98,6 +113,7 @@ View.prototype.render = function (todos = [] ) {
         li.appendChild(inputText);
         li.appendChild(button);
         
+        
         fragment.appendChild(box);
     }.bind(this));
     
@@ -106,5 +122,5 @@ View.prototype.render = function (todos = [] ) {
 
 View.prototype.clear = function () {
     this.root.replaceChildren();
-  }
+}
 export default View;
