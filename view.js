@@ -67,6 +67,7 @@ View.prototype.render = function (todos = [] ) {
             li.classList.remove('hide');
             dragEndItem.pos = dragStartPosition;
             dragStartItem.pos = dragEndPosition;
+            localStorage.setItem('todos', JSON.stringify(todos));
             this.render(todos);
         }.bind(this));
         
